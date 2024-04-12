@@ -8,29 +8,27 @@ export interface MyData {
     retailer: string;
     details: string[];
     tags: string[];
-    sales: {
+    sales: [{
       weekEnding: string;
       retailSales: number;
       wholesaleSales: number;
       unitsSold: number;
       retailerMargin: number;
-    }
+    }]
 }
 
 export interface ProductPageProps {
   data: MyData;
 }
 
-// interface Sales {
-//   map(arg0: (sale: any) => string): Iterable<unknown> | null | undefined;
-//   weekEnding: String;
-//   retailSales: Number; 
-//   wholesaleSales: Number;
-//   unitsSold: Number;
-//   retailerMargin: Number;
-// }
+export interface Sales {
+  weekEnding: string;
+  retailSales: Number; 
+  wholesaleSales: Number;
+  unitsSold: Number;
+  retailerMargin: Number;
+}
 
-// export interface SalesProps {
-//   map(arg0: (sale: any) => any): unknown;
-//   data: Sales;
-// }
+export interface SalesProps {
+  salesData: Sales[];
+}

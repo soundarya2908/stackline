@@ -93,7 +93,7 @@
 .tag {
   display: inline-block; 
   margin: 0 5px;
-  padding: 2px 8px; 
+  padding: 2px 5px; 
   font-size: 5px;
   width: fit-content;
   border: .7px solid rgb(230, 230, 230); 

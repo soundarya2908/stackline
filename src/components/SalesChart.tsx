@@ -1,17 +1,17 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
-import jsonData from '../data/data.json';
+import { SalesProps } from '../store/types';
 
 type MonthIndex = {
   [key: string]: number;
 };
 
-const SalesChart: React.FC = () => {
+const SalesChart: React.FC<SalesProps> = ( {salesData}) => {
   const chartRef = useRef<HTMLCanvasElement>(null);
+  console.log(salesData[0].weekEnding)
 
   useEffect(() => {
     if (chartRef.current) {
-      const salesData = jsonData[0].sales;
 
       const monthsSet = new Set(
         salesData.map((sale) => new Date(sale.weekEnding).toLocaleString('default', { month: 'short' }).toUpperCase())
