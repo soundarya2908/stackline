@@ -1,48 +1,44 @@
-import React, { useEffect, useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchData } from './store/action'; 
 import Header from './components/Header';
-import { MyData } from './store/types';
-import './App.css';
 import ProductPage from './components/ProductPage';
+import { UserActionTypes } from './store/types';
+import { ThunkDispatch } from 'redux-thunk';
+import { RootState } from './store/store';
+import { useAppSelector } from './store/hooks';
 
 function App() {
-  const [data, setData] = useState<MyData[] | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data, isLoading, isError } = useAppSelector((state: RootState) => state);
+  const dispatch = useDispatch<ThunkDispatch<RootState, null, UserActionTypes>>();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchDataAndDispatch = async () => {
       try {
-        const response = await fetch("data.json");
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        const jsonData = await response.json();
-        setData(jsonData);
-        setLoading(false);
-      } catch (error: Error | any) {
-        setError(error);
-        setLoading(false);
+        dispatch(fetchData());
+      } catch (error) {
+        console.error('Error fetching data:', error);
       }
     };
-
-    fetchData();
+    fetchDataAndDispatch();
   }, []);
 
-  if (loading) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  if (error) {
-    return <div>Error: {error.toString()}</div>;
+  if (isError) {
+    return <div>Error: Failed to fetch data</div>;
   }
 
-  if (!data) {
+  if (!data || data.length === 0) {
     return <div>No data available</div>;
   }
 
+  console.log(data)
+
   return (
-    <div> 
+    <div>
       <div className='header'>
         <Header />
       </div>

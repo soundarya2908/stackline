@@ -1,3 +1,5 @@
+import reducer from "./reducer";
+
 export interface MyData {
     id: string;
     title: string;
@@ -32,3 +34,34 @@ export interface Sales {
 export interface SalesProps {
   salesData: Sales[];
 }
+
+export enum ActionTypes {
+  LOAD = 'LOAD',
+  LOAD_SUCCESS = 'LOAD_SUCCESS',
+  LOAD_FAILURE = 'LOAD_FAILURE',
+}
+
+interface LoadAction {
+  type: ActionTypes.LOAD;
+}
+
+interface LoadSuccessAction {
+  type: ActionTypes.LOAD_SUCCESS;
+  usersData: MyData[]; 
+  error: string;
+}
+
+interface LoadFailureAction {
+  type: ActionTypes.LOAD_FAILURE;
+  error: string;
+}
+
+export type UserActionTypes = LoadAction | LoadSuccessAction | LoadFailureAction;
+
+// export interface RootState {
+//   reducer: {
+//     data: MyData[];
+//     isLoading: boolean;
+//     isError: boolean;
+//   };
+// }
