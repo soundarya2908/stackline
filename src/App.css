@@ -1,0 +1,112 @@
+
+* {
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#root {
+  height: 100%;
+  background-color: rgb(237, 239, 245);
+  width: 100%;
+}
+
+.header {
+  height: 30px;
+  background-color: #001f3f;
+  max-width: 100%;
+}
+
+.logo {
+  height: 15px;
+  padding-left: 10px;
+  padding-top: 5px;
+  vertical-align: middle;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 20% auto;
+  padding-top: 20px;
+  gap: 10px; 
+  margin-left: 10px;
+  margin-right: 10px;
+  min-height: 100vh;
+  max-height: 100%;
+}
+
+.sales {
+  grid-template-rows: 60% 40%;
+  min-height: 100vh;
+  max-height: 100%;
+}
+
+.card {
+  padding: 10px; 
+  background-color: #fff;
+  border-radius: 2px;
+}
+
+#product {
+  height: 100%;
+}
+
+#graph {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#table {
+  min-height: auto;
+}
+
+.image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.title {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 8px;
+  color: lightslategrey;
+  text-align: center;
+}
+
+.tags {
+  /* display: inline-block;  */
+  width: 95%;
+  margin-right: auto;
+  margin-left: auto;
+  border-top: .5px solid;
+  border-bottom: .5px solid;
+  border-color: lightgray;
+  padding-bottom: 5px;
+
+}
+
+.tag {
+  display: inline-block; 
+  margin: 0 5px;
+  padding: 2px 8px; 
+  font-size: 5px;
+  width: fit-content;
+  border: .7px solid rgb(230, 230, 230); 
+  border-radius: 2px;
+  color: #555;
+}
+
+#footer {
+  grid-area: footer;
+}
+
+#chart {
+  width: 100%;
+  height: 100%;
+}
+
