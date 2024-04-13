@@ -11,16 +11,11 @@ const ProductPage: React.FC<ProductPageProps> = (jsonData) => {
     <div> 
       <div className='container'>
         <div className='card' id='product'>
-          <Product
-            imageUrl={jsonData.data.image}
-            title={jsonData.data.title}
-            subtitle={jsonData.data.subtitle}
-            tags={jsonData.data.tags}
-          />
+          <Product />
         </div>
         <div className='sales'>
           <div className='card' id='graph'>
-            <SalesChart salesData={jsonData.data.sales} />
+            <SalesChart />
           </div>
           <div id='table' style={{ backgroundColor: 'blue' }}>
             <Table salesData={jsonData.data.sales} />

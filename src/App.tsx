@@ -35,8 +35,6 @@ function App() {
     return <div>No data available</div>;
   }
 
-  console.log(data)
-
   return (
     <div>
       <div className='header'>

@@ -58,10 +58,3 @@ interface LoadFailureAction {
 
 export type UserActionTypes = LoadAction | LoadSuccessAction | LoadFailureAction;
 
-// export interface RootState {
-//   reducer: {
-//     data: MyData[];
-//     isLoading: boolean;
-//     isError: boolean;
-//   };
-// }

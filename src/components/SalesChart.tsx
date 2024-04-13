@@ -1,20 +1,24 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
-import { SalesProps } from '../store/types';
+import { Sales, SalesProps } from '../store/types';
+import { useAppSelector } from '../store/hooks';
+import { RootState } from '../store/store';
 
 type MonthIndex = {
   [key: string]: number;
 };
 
-const SalesChart: React.FC<SalesProps> = ( {salesData}) => {
+const SalesChart = () => {
+  const { data } = useAppSelector((state: RootState) => state);
+  const salesData = data[0].sales;
+  
   const chartRef = useRef<HTMLCanvasElement>(null);
-  console.log(salesData[0].weekEnding)
 
   useEffect(() => {
     if (chartRef.current) {
 
       const monthsSet = new Set(
-        salesData.map((sale) => new Date(sale.weekEnding).toLocaleString('default', { month: 'short' }).toUpperCase())
+        salesData.map((sale: Sales) => new Date(sale.weekEnding).toLocaleString('default', { month: 'short' }).toUpperCase())
       );
       let months = Array.from(monthsSet);
 
@@ -22,10 +26,10 @@ const SalesChart: React.FC<SalesProps> = ( {salesData}) => {
         JAN: 0, FEB: 1, MAR: 2, APR: 3, MAY: 4, JUN: 5, JUL: 6, AUG: 7, SEP: 8, OCT: 9, NOV: 10, DEC: 11
       };
 
-      months.sort((a, b) => monthIndex[a] - monthIndex[b]);
+      months.sort((a: any, b: any) => monthIndex[a] - monthIndex[b]);
 
-      const retailSales = salesData.map((sale) => sale.retailSales);
-      const retailerMargin = salesData.map((sale) => sale.retailerMargin);
+      const retailSales = salesData.map((sale: Sales) => sale.retailSales);
+      const retailerMargin = salesData.map((sale: Sales) => sale.retailerMargin);
 
       const chart = new Chart(chartRef.current, {
         type: 'line',
@@ -59,10 +63,10 @@ const SalesChart: React.FC<SalesProps> = ( {salesData}) => {
               position: 'chartArea',
               labels: {
                 usePointStyle: true,
-                boxWidth: 4,
-                boxHeight: 4,
+                boxWidth: 7,
+                boxHeight: 7,
                 font: {
-                  size: 8,
+                  size: 14,
                 }
               }
             },
@@ -72,7 +76,7 @@ const SalesChart: React.FC<SalesProps> = ( {salesData}) => {
                 position: 'top',
                 align: 'start',
                 font: {
-                  size: 10,
+                  size: 17,
                   weight: 'normal' 
                 }
                 
@@ -90,7 +94,7 @@ const SalesChart: React.FC<SalesProps> = ( {salesData}) => {
               },
               ticks: {
                 font: {
-                  size: 8,
+                  size: 13,
                   weight: '250', 
                 },
               },
@@ -107,7 +111,7 @@ const SalesChart: React.FC<SalesProps> = ( {salesData}) => {
     }
   }, []);
 
-  return <canvas ref={chartRef} style={{ height: '275px' }} />;
+  return <canvas ref={chartRef} style={{ height: '450px' }} />;
 };
 
 export default SalesChart;

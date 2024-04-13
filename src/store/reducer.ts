@@ -13,7 +13,6 @@ const initialState: InitialState = {
 };
 
 const reducer = (state = initialState, action: any) => { 
-    console.log("Inside reducer " + action.type)
     switch (action.type) {
         case ActionTypes.LOAD:
             return {
