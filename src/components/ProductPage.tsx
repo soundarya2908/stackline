@@ -4,6 +4,7 @@ import SalesChart from './SalesChart';
 import '../App.css';
 import { MyData,  ProductPageProps} from '../store/types';
 import Table from './Table';
+import { SalesTable } from './SalesTable';
 
 
 const ProductPage: React.FC<ProductPageProps> = (jsonData) => {
@@ -18,7 +19,7 @@ const ProductPage: React.FC<ProductPageProps> = (jsonData) => {
             <SalesChart />
           </div>
           <div id='table' style={{ backgroundColor: 'blue' }}>
-            <Table salesData={jsonData.data.sales} />
+            <SalesTable />
           </div>
         </div>
       </div>
