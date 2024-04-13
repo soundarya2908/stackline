@@ -12,8 +12,8 @@ import Paper from '@mui/material/Paper';
 import { visuallyHidden } from '@mui/utils';
 import { useAppSelector } from '../store/hooks';
 import { RootState } from '../store/store';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import '../App.css';
-
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -30,10 +30,7 @@ type Order = 'asc' | 'desc';
 function getComparator<Key extends keyof any>(
   order: Order,
   orderBy: Key,
-): (
-  a: { [key in Key]: number | string },
-  b: { [key in Key]: number | string },
-) => number {
+): (a: { [key in Key]: number | string }, b: { [key in Key]: number | string }) => number {
   return order === 'desc'
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
@@ -55,12 +52,11 @@ interface EnhancedTableProps {
   onRequestSort: (event: React.MouseEvent<unknown>, property: string) => void;
   order: Order;
   orderBy: string;
-  rowCount: number;
-  data: string[];
 }
 
 function EnhancedTableHead(props: EnhancedTableProps) {
-  const { order, orderBy, onRequestSort, data } = props;
+  const { order, orderBy, onRequestSort } = props;
+
   const createSortHandler = (property: string) => (event: React.MouseEvent<unknown>) => {
     onRequestSort(event, property);
   };
@@ -68,16 +64,31 @@ function EnhancedTableHead(props: EnhancedTableProps) {
   return (
     <TableHead>
       <TableRow>
-        {data.map((each) => (
-          <TableCell key={each} sortDirection={orderBy === each ? order : false}>
+        {[
+          { id: 'weekEnding', label: 'WEEK ENDING' },
+          { id: 'retailSales', label: 'RETAIL SALES' },
+          { id: 'wholesaleSales', label: 'WHOLESALE SALES' },
+          { id: 'unitsSold', label: 'UNITS SOLD' },
+          { id: 'retailerMargin', label: 'RETAILER MARGIN' },
+        ].map((headCell) => (
+          <TableCell
+            key={headCell.id}
+            sortDirection={orderBy === headCell.id ? order : false}
+          >
             <TableSortLabel
-              active={orderBy === each}
-              direction={orderBy === each ? order : 'asc'}
-              onClick={createSortHandler(each)}
-              style={{ color: 'gray', fontSize: '12px', textAlign: 'left', fontWeight: 540}}
+              active={orderBy === headCell.id}
+              direction={orderBy === headCell.id ? order : 'asc'}
+              onClick={createSortHandler(headCell.id)}
+              IconComponent={KeyboardArrowUpIcon} 
+              sx={{
+                '& .MuiTableSortLabel-icon': {
+                  opacity: orderBy === headCell.id ? 1 : 0.5, 
+                  color: orderBy === headCell.id ? 'primary.main' : 'grey.500', 
+                },
+              }}
             >
-              {each}
-              {orderBy === each ? (
+              {headCell.label}
+              {orderBy === headCell.id ? (
                 <Box component="span" sx={visuallyHidden}>
                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
                 </Box>
@@ -95,9 +106,8 @@ export function SalesTable() {
   const salesData = data[0].sales;
 
   const [order, setOrder] = React.useState<Order>('asc');
-  const [orderBy, setOrderBy] = React.useState<string>('calories');
+  const [orderBy, setOrderBy] = React.useState<string>('');
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const handleRequestSort = (event: React.MouseEvent<unknown>, property: string) => {
@@ -124,7 +134,7 @@ export function SalesTable() {
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage,
       ),
-    [order, orderBy, page, rowsPerPage],
+    [salesData, order, orderBy, page, rowsPerPage],
   );
 
   return (
@@ -136,35 +146,19 @@ export function SalesTable() {
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
-              rowCount={salesData.length}
-              data={['WEEK ENDING', 'RETAIL SALES', 'WHOLESALE SALES', 'UNITS SOLD', 'RETAILER MARGIN']}
             />
             <TableBody>
               {visibleRows.map((row) => (
                 <TableRow key={row.weekEnding}>
-                  <TableCell style={{ color: 'lightslategray', fontSize: '12px', textAlign: 'left' }}>
-                    {row.weekEnding}
-                  </TableCell>
-                  <TableCell style={{ color: 'lightslategray', fontSize: '12px', textAlign: 'center' }}>
-                    {row.retailSales}
-                  </TableCell>
-                  <TableCell style={{ color: 'lightslategray', fontSize: '12px', textAlign: 'center' }}>
-                    {row.wholesaleSales}
-                  </TableCell>
-                  <TableCell style={{ color: 'lightslategray', fontSize: '12px', textAlign: 'center' }}>
-                    {row.unitsSold}
-                  </TableCell>
-                  <TableCell style={{ color: 'lightslategray', fontSize: '16px', textAlign: 'center' }}>
-                    {row.retailerMargin}
-                  </TableCell>
+                  <TableCell>{row.weekEnding}</TableCell>
+                  <TableCell>{row.retailSales}</TableCell>
+                  <TableCell>{row.wholesaleSales}</TableCell>
+                  <TableCell>{row.unitsSold}</TableCell>
+                  <TableCell>{row.retailerMargin}</TableCell>
                 </TableRow>
               ))}
               {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
+                <TableRow style={{ height: 53 * emptyRows }}>
                   <TableCell colSpan={6} />
                 </TableRow>
               )}
