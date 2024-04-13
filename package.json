@@ -1,4 +1,5 @@
 {
+  "homepage": "http://soundarya2908.github.io/stackline",
   "name": "stackline-assessment",
   "version": "0.1.0",
   "private": true,
@@ -32,10 +33,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "deploy": "gh-pages -b main -d build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -58,6 +60,7 @@
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
     "file-loader": "^6.2.0",
+    "gh-pages": "^6.1.1",
     "webpack": "^5.91.0"
   }
 }
