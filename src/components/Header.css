@@ -1,0 +1,12 @@
+.header {
+    height: 50px;
+    background-color: #001f3f;
+    max-width: 100%;
+}
+
+.logo {
+    height: 20px;
+    padding-left: 10px;
+    padding-top: 13px;
+    vertical-align: middle;
+}

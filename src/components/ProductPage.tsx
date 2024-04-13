@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react';
 import Product from './Product';
 import SalesChart from './SalesChart';
 import '../App.css';
-import { MyData,  ProductPageProps} from '../store/types';
-import Table from './Table';
+import {  ProductPageProps} from '../types/types';
 import { SalesTable } from './SalesTable';
-
+import './ProductPage.css';
 
 const ProductPage: React.FC<ProductPageProps> = (jsonData) => {
   return (
     <div> 
-      <div className='container'>
+      <div className='page-container'>
         <div className='card' id='product'>
           <Product />
         </div>
@@ -18,7 +16,7 @@ const ProductPage: React.FC<ProductPageProps> = (jsonData) => {
           <div className='card' id='graph'>
             <SalesChart />
           </div>
-          <div id='table' style={{ backgroundColor: 'blue' }}>
+          <div style={{ backgroundColor: 'blue' }}>
             <SalesTable />
           </div>
         </div>

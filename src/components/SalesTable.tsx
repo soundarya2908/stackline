@@ -10,8 +10,8 @@ import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Paper from '@mui/material/Paper';
 import { visuallyHidden } from '@mui/utils';
-import { useAppSelector } from '../store/hooks';
-import { RootState } from '../store/store';
+import { useAppSelector } from '../redux/hooks';
+import { RootState } from '../redux/store';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import '../App.css';
 
@@ -74,6 +74,11 @@ function EnhancedTableHead(props: EnhancedTableProps) {
           <TableCell
             key={headCell.id}
             sortDirection={orderBy === headCell.id ? order : false}
+            sx={{
+              fontSize: '13px',
+              fontWeight: 510,
+              color: 'rgb(100,100,100)'
+            }}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
@@ -85,6 +90,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
                   opacity: orderBy === headCell.id ? 1 : 0.5, 
                   color: orderBy === headCell.id ? 'primary.main' : 'grey.500', 
                 },
+          
               }}
             >
               {headCell.label}
@@ -150,11 +156,11 @@ export function SalesTable() {
             <TableBody>
               {visibleRows.map((row) => (
                 <TableRow key={row.weekEnding}>
-                  <TableCell>{row.weekEnding}</TableCell>
-                  <TableCell>{row.retailSales}</TableCell>
-                  <TableCell>{row.wholesaleSales}</TableCell>
-                  <TableCell>{row.unitsSold}</TableCell>
-                  <TableCell>{row.retailerMargin}</TableCell>
+                  <TableCell sx={{ color: 'lightslategray' }}>{row.weekEnding}</TableCell>
+                  <TableCell sx={{ color: 'lightslategray' }}>{row.retailSales}</TableCell>
+                  <TableCell sx={{ color: 'lightslategray' }}>{row.wholesaleSales}</TableCell>
+                  <TableCell sx={{ color: 'lightslategray' }}>{row.unitsSold}</TableCell>
+                  <TableCell sx={{ color: 'lightslategray' }}>{row.retailerMargin}</TableCell>
                 </TableRow>
               ))}
               {emptyRows > 0 && (

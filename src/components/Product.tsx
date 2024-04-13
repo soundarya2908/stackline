@@ -1,14 +1,7 @@
 import React from 'react';
-import '../App.css';
-import { useAppSelector } from '../store/hooks';
-import { RootState } from '../store/store';
-
-interface ProductProps {
-  imageUrl: string;
-  title: string;
-  subtitle: string;
-  tags: string[]
-}
+import './Product.css';
+import { useAppSelector } from '../redux/hooks';
+import { RootState } from '../redux/store';
 
 const Product = () => {
   const { data } = useAppSelector((state: RootState) => state);

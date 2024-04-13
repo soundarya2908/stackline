@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
-import { Sales, SalesProps } from '../store/types';
-import { useAppSelector } from '../store/hooks';
-import { RootState } from '../store/store';
+import { Sales, SalesProps } from '../types/types';
+import { useAppSelector } from '../redux/hooks';
+import { RootState } from '../redux/store';
 
 type MonthIndex = {
   [key: string]: number;

@@ -1,5 +1,3 @@
-import reducer from "./reducer";
-
 export interface MyData {
     id: string;
     title: string;

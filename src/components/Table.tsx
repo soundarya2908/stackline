@@ -1,4 +1,4 @@
-import { SalesProps } from "../store/types";
+import { SalesProps } from "../types/types";
 import SalesChart from "./SalesChart";
 
 const Table: React.FC<SalesProps> = ( {salesData}) => {

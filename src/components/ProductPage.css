@@ -1,0 +1,19 @@
+.sales {
+    grid-template-rows: 60% 40%;
+    min-height: 100vh;
+    max-height: 100%;
+}
+  
+.card {
+    padding: 10px; 
+    background-color: #fff;
+    border-radius: 2px;
+}
+
+#product {
+    height: 100%;
+}
+
+#graph {
+    margin-bottom: 50px;
+}

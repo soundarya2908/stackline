@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchData } from './store/action'; 
+import { fetchData } from './redux/actions/loadAction'; 
 import Header from './components/Header';
 import ProductPage from './components/ProductPage';
-import { UserActionTypes } from './store/types';
+import { UserActionTypes } from './types/types';
 import { ThunkDispatch } from 'redux-thunk';
-import { RootState } from './store/store';
-import { useAppSelector } from './store/hooks';
+import { RootState } from './redux/store';
+import { useAppSelector } from './redux/hooks';
 
 function App() {
   const { data, isLoading, isError } = useAppSelector((state: RootState) => state);
@@ -37,9 +37,7 @@ function App() {
 
   return (
     <div>
-      <div className='header'>
-        <Header />
-      </div>
+      <Header />
       <ProductPage data={data[0]} />
     </div>
   );

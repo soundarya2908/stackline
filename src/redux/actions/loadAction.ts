@@ -1,7 +1,7 @@
 import { ThunkAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { RootState } from "./store";
-import { ActionTypes, MyData, UserActionTypes } from "./types";
+import { RootState } from "../store";
+import { ActionTypes, MyData, UserActionTypes } from "../../types/types";
 
 export const fetchData = (): ThunkAction<void, RootState, unknown, UserActionTypes> => async (dispatch) => {
   dispatch({ type: ActionTypes.LOAD });

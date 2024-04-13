@@ -1,4 +1,4 @@
-import { ActionTypes, MyData } from './types';
+import { ActionTypes, MyData } from '../../types/types';
 
 interface InitialState {
     data: MyData[]; 
