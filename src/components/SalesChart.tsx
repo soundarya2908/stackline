@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import { Sales, SalesProps } from '../types/types';
 import { useAppSelector } from '../redux/hooks';
@@ -109,7 +109,7 @@ const SalesChart = () => {
         chart.destroy();
       };
     }
-  }, []);
+  });
 
   return <canvas ref={chartRef} style={{ height: '450px' }} />;
 };

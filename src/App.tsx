@@ -21,7 +21,7 @@ function App() {
       }
     };
     fetchDataAndDispatch();
-  }, []);
+  });
 
   if (isLoading) {
     return <div>Loading...</div>;
